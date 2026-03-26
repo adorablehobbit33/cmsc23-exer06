@@ -44,7 +44,7 @@ class _ContactDetailsState extends State<ContactDetails> {
   }
 
   Future<void> createNewContact() async {
-    // 1️⃣ Request permission
+    // Request permission
     final status = await FlutterContacts.permissions.request(PermissionType.readWrite);
 
     if (status == PermissionStatus.granted) {
@@ -60,7 +60,7 @@ class _ContactDetailsState extends State<ContactDetails> {
         return; // stop if empty
       }
 
-      // 2️⃣ Build your Contact object
+      // Contact object
       final contact = Contact(
         name: Name(first: firstNameController.text, last: lastNameController.text),
         phones: [Phone(number: phoneController.text)],
@@ -68,7 +68,7 @@ class _ContactDetailsState extends State<ContactDetails> {
         photo: photoBytes != null ? Photo(fullSize: photoBytes) : null
       );
     
-      // 3️⃣ Save it to the phone
+      // Save it to the phone
       String newContactId = await FlutterContacts.create(contact);
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -79,7 +79,7 @@ class _ContactDetailsState extends State<ContactDetails> {
         ),
       );
 
-      Navigator.pop(context); // go back after saving
+      Navigator.pop(context); // Go back after saving
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
